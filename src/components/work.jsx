@@ -1,4 +1,13 @@
-export default function WorkHistoryForm() {
+export default function WorkHistoryForm({ formData }) {
+  const {
+    setTitle,
+    setCompany,
+    setStartDate,
+    setEndDate,
+    setResponsible,
+    setAchievement,
+  } = formData;
+
   function handleDate() {
     const start = document.getElementById("start");
     const end = document.getElementById("end");
@@ -31,6 +40,7 @@ export default function WorkHistoryForm() {
           name="title"
           id="title"
           placeholder="Assistant Manager"
+          onChange={(e) => setTitle(e.target.value)}
         />
         <label htmlFor="company">Company: </label>
         <input
@@ -38,15 +48,33 @@ export default function WorkHistoryForm() {
           name="company"
           id="company"
           placeholder="Casey's General Store"
+          onChange={(e) => setCompany(e.target.value)}
         />
         <label htmlFor="start">Start Date: </label>
-        <input type="date" name="start" id="start" onClick={handleDate} />
+        <input
+          type="date"
+          name="start"
+          id="start"
+          onClick={handleDate}
+          onChange={(e) => setStartDate(e.target.value)}
+        />
         <label htmlFor="end">End Date: </label>
-        <input type="date" name="end" id="end" onClick={handleDate} />
+        <input
+          type="date"
+          name="end"
+          id="end"
+          onClick={handleDate}
+          onChange={(e) => setEndDate(e.target.value)}
+        />
         <label htmlFor="responsibilities">Responsibilities: </label>
         <ul>
           <li>
-            <input type="text" name="responsibilities" id="responsibilities" />
+            <input
+              type="text"
+              name="responsibilities"
+              id="responsibilities"
+              onChange={(e) => setResponsible(e.target.value)}
+            />
           </li>
         </ul>
         <label htmlFor="achievements">Notable Achievements: </label>
@@ -56,6 +84,7 @@ export default function WorkHistoryForm() {
           id="achievements"
           rows={1}
           wrap="soft"
+          onChange={(e) => setAchievement(e.target.value)}
         />
       </form>
     </div>
