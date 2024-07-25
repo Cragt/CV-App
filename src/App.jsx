@@ -16,6 +16,7 @@ function App() {
   const [achievement, setAchievement] = useState("");
   const [school, setSchool] = useState("");
   const [degree, setDegree] = useState(null);
+  const [major, setMajor] = useState("");
 
   const formData = {
     fullName,
@@ -40,14 +41,26 @@ function App() {
     setSchool,
     degree,
     setDegree,
+    major,
+    setMajor,
   };
   return (
-    <>
-      <PersonalForm formData={formData} />
-      <WorkHistoryForm formData={formData} />
-      <Education formData={formData} />
-      <Preview formData={formData} />
-    </>
+    <div className="cv-wrapper">
+      <div className="row">
+        <div className="column">
+          <div className="forms">
+            <PersonalForm formData={formData} />
+            <WorkHistoryForm formData={formData} />
+            <Education formData={formData} />
+          </div>
+        </div>
+        <div className="column">
+          <div className="preview">
+            <Preview formData={formData} />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 

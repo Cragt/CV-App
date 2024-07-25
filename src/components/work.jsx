@@ -39,7 +39,7 @@ export default function WorkHistoryForm({ formData }) {
           type="text"
           name="title"
           id="title"
-          placeholder="Assistant Manager"
+          placeholder="Full Stack Web Developer"
           onChange={(e) => setTitle(e.target.value)}
         />
         <label htmlFor="company">Company: </label>
@@ -47,7 +47,7 @@ export default function WorkHistoryForm({ formData }) {
           type="text"
           name="company"
           id="company"
-          placeholder="Casey's General Store"
+          placeholder="Amazon"
           onChange={(e) => setCompany(e.target.value)}
         />
         <label htmlFor="start">Start Date: </label>

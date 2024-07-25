@@ -1,5 +1,5 @@
 export default function Education({ formData }) {
-  const { setSchool, setDegree } = formData;
+  const { setSchool, setDegree, setMajor } = formData;
   return (
     <div>
       <h2>Education</h2>
@@ -9,7 +9,7 @@ export default function Education({ formData }) {
           type="text"
           name="school"
           id="school"
-          placeholder="Lincoln Trail College"
+          placeholder="Harvard"
           onChange={(e) => setSchool(e.target.value)}
         />
         <label htmlFor="degree">Highest Level Achieved: </label>
@@ -25,6 +25,14 @@ export default function Education({ formData }) {
           <option value="Master's">Master&apos;s</option>
           <option value="Doctorate">Doctorate</option>
         </select>
+        <label htmlFor="major">Major: </label>
+        <input
+          type="text"
+          name="major"
+          id="major"
+          placeholder="Computer Science"
+          onChange={(e) => setMajor(e.target.value)}
+        />
       </form>
     </div>
     // Add button to add extra forms for more than one school

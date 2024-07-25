@@ -19,7 +19,7 @@ export default function PersonalForm({ formData }) {
           type="email"
           name="email"
           id="email"
-          placeholder="contact@craigtaylor.dev"
+          placeholder="example@gmail.com"
           onChange={(e) => setEmail(e.target.value)}
         />
         <label htmlFor="phone">Phone Number: </label>
@@ -27,7 +27,7 @@ export default function PersonalForm({ formData }) {
           type="tel"
           name="phone"
           id="phone"
-          placeholder="812-881-6275"
+          placeholder="555-555-5555"
           onChange={(e) => setNumber(e.target.value)}
         />
       </form>
