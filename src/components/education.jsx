@@ -12,20 +12,7 @@ export default function Education({ formData }) {
           placeholder="Harvard"
           onChange={(e) => setSchool(e.target.value)}
         />
-        <label htmlFor="degree">Highest Level Achieved: </label>
-        <select
-          name="degree"
-          id="degree"
-          defaultValue={"Associate's"}
-          onChange={(e) => setDegree(e.target.value)}
-        >
-          <option value="Incomplete">Incomplete</option>
-          <option value="Associate's">Associate</option>
-          <option value="Bachelor's">Bachelor&apos;s</option>
-          <option value="Master's">Master&apos;s</option>
-          <option value="Doctorate">Doctorate</option>
-        </select>
-        <label htmlFor="major">Major: </label>
+        <label htmlFor="major">Major:</label>
         <input
           type="text"
           name="major"
@@ -33,6 +20,19 @@ export default function Education({ formData }) {
           placeholder="Computer Science"
           onChange={(e) => setMajor(e.target.value)}
         />
+        <label htmlFor="degree">Highest Level Achieved: </label>
+        <select
+          name="degree"
+          id="degree"
+          defaultValue={"Associate's"}
+          onClick={(e) => setDegree(e.target.value)}
+        >
+          <option value="Incomplete">Incomplete</option>
+          <option value="Associate's">Associate</option>
+          <option value="Bachelor's">Bachelor&apos;s</option>
+          <option value="Master's">Master&apos;s</option>
+          <option value="Doctorate">Doctorate</option>
+        </select>
       </form>
     </div>
     // Add button to add extra forms for more than one school
