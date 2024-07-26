@@ -15,7 +15,7 @@ function App() {
   const [responsible, setResponsible] = useState("");
   const [achievement, setAchievement] = useState("");
   const [school, setSchool] = useState("");
-  const [degree, setDegree] = useState(null);
+  const [degree, setDegree] = useState("");
   const [major, setMajor] = useState("");
 
   const formData = {
