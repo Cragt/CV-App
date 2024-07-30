@@ -42,13 +42,12 @@ export default function Preview({ formData }) {
     // Add full name with custom font size and color
     pdf.setFontSize(18);
     pdf.setTextColor(226, 229, 231); // Light text color
-    y = addText(fullName, margin, y, 18);
+    y = addText(fullName, margin, y, 22);
 
     // Add background rectangle for email and number
     const backgroundHeight = 20; // Height of the background rectangle
     const backgroundWidth = pageWidth - 2 * margin; // Width of the background rectangle
     const textOffset = 5; // Offset for text inside the rectangle
-    const spacing = 20; // Space between email and number
 
     pdf.setFillColor(255, 165, 0); // Orange background
     pdf.rect(margin, y, backgroundWidth, backgroundHeight, "F"); // Draw rectangle
@@ -63,56 +62,64 @@ export default function Preview({ formData }) {
     const numberWidth =
       pdf.getStringUnitWidth(number) * pdf.internal.getFontSize();
 
-    // Calculate available width and adjust if needed
+    // Calculate positions
     const availableWidth = backgroundWidth - 2 * textOffset; // Total available width minus margins
+    const totalWidth = emailWidth + numberWidth + textOffset; // Combined width with spacing
 
-    if (emailWidth + numberWidth + spacing > availableWidth) {
-      // If the combined width of email and number exceeds available width, reduce font size
-      const scaleFactor = availableWidth / (emailWidth + numberWidth + spacing);
+    let emailX, numberX;
+
+    if (totalWidth <= availableWidth) {
+      // If the combined width of email and number fits, place them on the same line
+      emailX = margin + textOffset;
+      numberX = emailX + emailWidth + textOffset;
+    } else {
+      // If it doesn't fit, scale down font size
+      const scaleFactor = availableWidth / totalWidth;
       pdf.setFontSize(12 * scaleFactor);
+      emailX = margin + textOffset;
+      numberX =
+        emailX +
+        pdf.getStringUnitWidth(email) * pdf.internal.getFontSize() +
+        textOffset;
     }
 
-    // Recalculate widths with adjusted font size
-    const adjustedFontSize = pdf.internal.getFontSize();
-    const adjustedEmailWidth = pdf.getStringUnitWidth(email) * adjustedFontSize;
-
-    // Calculate positions
-    const emailX = margin + textOffset;
-    const numberX = emailX + adjustedEmailWidth + spacing;
-
     // Add email and number text
-    y = addText(
-      email,
-      emailX,
-      y + backgroundHeight / 2 - adjustedFontSize / 2,
-      adjustedFontSize
-    ); // Center vertically
-    y = addText(number, numberX, y, adjustedFontSize); // Place number with spacing
+    y += backgroundHeight / 2; // Center vertically within the rectangle
+    pdf.text(email, emailX, y);
+    pdf.text(number, numberX, y);
 
     y += backgroundHeight + lineHeight; // Move y down for the next section
 
     // Add work history with custom formatting
     pdf.setFontSize(16);
     pdf.setTextColor(226, 229, 231); // Light text color for section headers
-    y = addText("Work History", margin, y, 16);
+    y = addText("Work History", margin, y, 18);
     pdf.setFontSize(14);
     pdf.setTextColor(226, 229, 231); // Light text color for content
-    y = addText(`Title: ${title}`, margin, y, 14);
-    y = addText(`Company: ${company}`, margin, y, 14);
-    y = addText(`Duration: ${startDate} to ${endDate}`, margin, y, 14);
+    y = addText(`Position: `, margin, y, 14);
+    y = addText(`${title}`, margin, y, 12);
+    y = addText(`Company: `, margin, y, 14);
+    y = addText(
+      `${company}                                                                      ${startDate} to ${endDate}`,
+      margin,
+      y,
+      12
+    );
     pdf.setFontSize(12);
-    y = addText(`Responsibilities: ${responsible}`, margin, y, 12);
-    y = addText(`Achievements: ${achievement}`, margin, y, 12);
+    y = addText(`Responsibilities: `, margin, y, 14);
+    y = addText(`${responsible}`, margin, y, 12);
+    y = addText(`Achievements: `, margin, y, 14);
+    y = addText(`${achievement}`, margin, y, 12);
 
     // Add education section
     pdf.setFontSize(16);
     pdf.setTextColor(226, 229, 231); // Light text color for section headers
-    y = addText("Education", margin, y, 16);
+    y = addText("Education", margin, y, 18);
     pdf.setFontSize(14);
     pdf.setTextColor(226, 229, 231); // Light text color for content
-    y = addText(`Degree: ${degree}`, margin, y, 14);
-    y = addText(`Major: ${major}`, margin, y, 14);
-    y = addText(`School: ${school}`, margin, y, 14);
+    y = addText(`Degree: `, margin, y, 14);
+    y = addText(`${degree} degree in ${major}`, margin, y, 12);
+    y = addText(`${school}`, margin, y, 12);
 
     // Save the PDF
     pdf.save("resume.pdf");
